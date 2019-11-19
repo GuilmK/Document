@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta content="text/html;charset=UTF-8"/>
+    <title th:text="${title}"></title>
+    <div th:replace="fragments/header :: css"></div>
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<div class="container-fluid">
+    <div class="row">
+        <div th:replace="fragments/sider :: sider"></div>
+        <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
+            <h1 th:text="${title}"></h1>
+            <div>
+                <form class="form-inline mt-2 mt-md-0 mb-md-2" th:action="@{/meet}" method="post">
+                    <input class="form-control mr-sm-2" name="eid" placeholder="EID" th:value="${condition.getEid()}" />
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">查询</button>
+                </form>
+            </div>
+            <div>
+                <form class="form-inline mt-2 mt-md-0 mb-md-2" th:action="@{/meet}" method="post">
+                    <input type="hidden" class="form-control mr-sm-2" name="eid" placeholder="EID" th:value="${condition.getEid()}" />
+                    <input type="hidden" class="form-control mr-sm-2" name="address" placeholder="EID" th:value="${startRow}" />
+                    <button th:if="${startRow} ne'end'" class="btn btn-outline-success my-2 my-sm-0" type="submit">更多</button>
+                </form>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>车辆编号</th>
+                        <th>相遇车辆编号</th>
+                        <th>相遇次数</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="meet: ${meetList}">
+                        <td></td>
+                        <td th:text="${meet.getMeid()}"></td>
+                        <td th:text="${meet.getOeid()}"></td>
+                        <td th:text="${meet.getCount()}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+</div>
+
+<div th:replace="fragments/header :: js"></div>
+</body>
+</html>
