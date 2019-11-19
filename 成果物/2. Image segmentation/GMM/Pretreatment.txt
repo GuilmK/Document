@@ -1,0 +1,14 @@
+img = imread('D:\zebra.jpg'); %只能是真彩色的jpg图片
+[m n c]=size(img);
+imshow(img);
+if(c==3) %RGB pic
+     
+    fid = fopen('D:\rgb.txt','w');
+    for i=1:m
+        for j=1:n
+            fprintf(fid,'%d %d %d',img(i,j,1),img(i,j,2),img(i,j,3));
+			fprintf(fid,'\n');  
+        end
+    end
+    fclose(fid);
+end
